@@ -1,4 +1,4 @@
-const [command, label, dir] = Deno.args
+const [command, label, dir] = Deno.args;
 type Command = string | null;
 
 // TODO: Windows対応
@@ -6,54 +6,58 @@ type Command = string | null;
 //   ? path.join(process.env.APPDATA!, 'Portal', 'portal.dat')
 //   : path.join(os.homedir(), '.portal');
 
-const filePath = import.meta.url
+const filePath = import.meta.url;
 
 export interface CommandArgs {
-  label: string | null,
-  dir: string | null
+  label: string | null;
+  dir: string | null;
 }
 
 const commandArgs: CommandArgs = {
   label,
-  dir
-}
+  dir,
+};
 
 export interface AppOptions {
-  PORTAL_FILE: string
+  PORTAL_FILE: string;
 }
 
 const appOptions = {
-  PORTAL_FILE: filePath
-}
+  PORTAL_FILE: filePath,
+};
 
-async function main (command: Command, commandArgs: CommandArgs, appOptions: AppOptions) {
+async function main(
+  command: Command,
+  commandArgs: CommandArgs,
+  appOptions: AppOptions,
+) {
   if (!command) {
-    return showAllCommands()
+    return showAllCommands();
   }
   switch (command) {
-    case 'go':
+    case "go":
       // go(commandArgs, appOptions)
       break;
-    case 'add':
+    case "add":
       // add(commandArgs, appOptions)
       break;
-    case 'edit':
+    case "edit":
       // edit(commandArgs, appOptions)
       break;
-    case 'remove':
+    case "remove":
       // remove(commandArgs, appOptions)
       break;
-    case 'list':
+    case "list":
       // list(appOptions)
       break;
   }
 }
 
-function showAllCommands(){
-  console.log("portal go     [label]")
-  console.log("portal add    [label] [dir]")
-  console.log("portal remove [label]")
-  console.log("portal list")
+function showAllCommands() {
+  console.log("portal go     [label]");
+  console.log("portal add    [label] [dir]");
+  console.log("portal remove [label]");
+  console.log("portal list");
 }
 
-main(command, commandArgs, appOptions)
+main(command, commandArgs, appOptions);
