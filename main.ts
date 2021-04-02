@@ -1,3 +1,5 @@
+import {add} from "./add.ts";
+
 const [command, label, dir] = Deno.args;
 type Command = string | null;
 
@@ -6,7 +8,11 @@ type Command = string | null;
 //   ? path.join(process.env.APPDATA!, 'Portal', 'portal.dat')
 //   : path.join(os.homedir(), '.portal');
 
-const filePath = import.meta.url;
+const filePath = `${Deno.env.get("HOME")}/.portal`;
+
+if (!filePath){
+  throw new Error(".portal file doesn't exist.")
+}
 
 export interface CommandArgs {
   label: string | null;
@@ -39,7 +45,7 @@ async function main(
       // go(commandArgs, appOptions)
       break;
     case "add":
-      // add(commandArgs, appOptions)
+      add(commandArgs, appOptions)
       break;
     case "edit":
       // edit(commandArgs, appOptions)
