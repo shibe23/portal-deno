@@ -1,4 +1,5 @@
 import {add} from "./add.ts";
+import {edit} from "./edit.ts";
 
 const [command, label, dir] = Deno.args;
 type Command = string | null;
@@ -45,10 +46,12 @@ async function main(
       // go(commandArgs, appOptions)
       break;
     case "add":
+      isValidAllOptions(commandArgs)
       add(commandArgs, appOptions)
       break;
     case "edit":
-      // edit(commandArgs, appOptions)
+      isValidAllOptions(commandArgs)
+      edit(commandArgs, appOptions)
       break;
     case "remove":
       // remove(commandArgs, appOptions)
@@ -56,6 +59,12 @@ async function main(
     case "list":
       // list(appOptions)
       break;
+  }
+}
+
+function isValidAllOptions(commandArgs: CommandArgs){
+  if (!commandArgs.label || !commandArgs.dir) {
+    throw new Error(`Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`)
   }
 }
 
