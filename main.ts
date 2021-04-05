@@ -2,6 +2,7 @@ import {add} from "./add.ts";
 import {edit} from "./edit.ts";
 import {remove} from "./remove.ts";
 import {list} from "./list.ts";
+import {go} from "./go.ts";
 
 const [command, label, dir] = Deno.args;
 type Command = string | null;
@@ -45,7 +46,8 @@ async function main(
   }
   switch (command) {
     case "go":
-      // go(commandArgs, appOptions)
+      isValidWithoutDir(commandArgs)
+      go(commandArgs, appOptions)
       break;
     case "add":
       isValidAllOptions(commandArgs)
@@ -56,6 +58,7 @@ async function main(
       edit(commandArgs, appOptions)
       break;
     case "remove":
+      isValidWithoutDir(commandArgs)
       remove(commandArgs, appOptions)
       break;
     case "list":
@@ -66,6 +69,12 @@ async function main(
 
 function isValidAllOptions(commandArgs: CommandArgs){
   if (!commandArgs.label || !commandArgs.dir) {
+    throw new Error(`Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`)
+  }
+}
+
+function isValidWithoutDir(commandArgs: CommandArgs){
+  if (!commandArgs.label) {
     throw new Error(`Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`)
   }
 }
