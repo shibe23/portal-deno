@@ -1,6 +1,7 @@
 import {add} from "./add.ts";
 import {edit} from "./edit.ts";
 import {remove} from "./remove.ts";
+import {list} from "./list.ts";
 
 const [command, label, dir] = Deno.args;
 type Command = string | null;
@@ -58,7 +59,7 @@ async function main(
       remove(commandArgs, appOptions)
       break;
     case "list":
-      // list(appOptions)
+      list(appOptions)
       break;
   }
 }
