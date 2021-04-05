@@ -1,9 +1,6 @@
 import {AppOptions, CommandArgs} from "./main.ts";
 
 export async function remove(value:CommandArgs, appOptions: AppOptions){
-  if (!value.label) {
-    throw new Error(`Invalid label. ${value.label}`)
-  }
   const file = await Deno.readTextFile(appOptions.PORTAL_FILE)
   const encoder = new TextEncoder()
 
