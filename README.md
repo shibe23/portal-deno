@@ -1,11 +1,14 @@
 # Portal
-Change Directory Helper. 
+
+Change Directory Helper.
 
 # Install
+
 ```
 git clone git@github.com:shibe23/portal-deno.git
 sh shell/install.sh
 ```
+
 Or setting manually.
 
 ```
@@ -19,20 +22,23 @@ cp `pwd`/bin/portal-exec /usr/local/bin/portal-exec
 # Usage
 
 ## portal add [label] [dir]
+
 Add `label` and `dir` on `~/.portal` file.
 
 ```
-portal add dev /path/to/your/directory 
-```   
+portal add dev /path/to/your/directory
+```
 
 ## portal go [label]
+
 Change your current directory.
 
 ```
 portal go dev
-```   
+```
 
 ## portal remove [label]
+
 Remove `label` and `dir` from your `~/.portal`
 
 ```
@@ -40,13 +46,14 @@ portal remove dev
 ```
 
 ## portal list
+
 Show `~/.portal`
 
 ```
 portal list
 
-# dev /path/to/your/directory 
-```   
+# dev /path/to/your/directory
+```
 
 # How to develop
 
@@ -65,6 +72,3 @@ deno --unstable compile --allow-env --allow-read --allow-write --output ./bin/po
 # LICENCE
 
 MIT
-
-
-
