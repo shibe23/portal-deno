@@ -1,7 +1,5 @@
-import {AppOptions} from "./main.ts";
+import { IO } from "./lib/file.ts";
 
-export async function list(appOptions: AppOptions) {
-  const file = await Deno.readTextFile(appOptions.PORTAL_FILE)
-  console.log(file)
+export async function list() {
+  console.log(await IO.read());
 }
-

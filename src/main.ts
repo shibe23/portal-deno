@@ -1,22 +1,11 @@
-import {add} from "./add.ts";
-import {edit} from "./edit.ts";
-import {remove} from "./remove.ts";
-import {list} from "./list.ts";
-import {go} from "./go.ts";
+import { add } from "./add.ts";
+import { edit } from "./edit.ts";
+import { remove } from "./remove.ts";
+import { list } from "./list.ts";
+import { go } from "./go.ts";
 
 const [command, label, dir] = Deno.args;
 type Command = string | null;
-
-// TODO: Windows対応
-// const filePath = Deno.build.os === 'windows'
-//   ? path.join(process.env.APPDATA!, 'Portal', 'portal.dat')
-//   : path.join(os.homedir(), '.portal');
-
-const filePath = `${Deno.env.get("HOME")}/.portal`;
-
-if (!filePath){
-  throw new Error(".portal file doesn't exist.")
-}
 
 export interface CommandArgs {
   label: string | null;
@@ -28,54 +17,51 @@ const commandArgs: CommandArgs = {
   dir,
 };
 
-export interface AppOptions {
-  PORTAL_FILE: string;
-}
-
-const appOptions = {
-  PORTAL_FILE: filePath,
-};
-
 async function main(
   command: Command,
   commandArgs: CommandArgs,
-  appOptions: AppOptions,
 ) {
   if (!command) {
     return showAllCommands();
   }
   switch (command) {
     case "go":
-      isValidWithoutDir(commandArgs)
-      go(commandArgs, appOptions)
+      isValidWithoutDir(commandArgs);
+      await go(commandArgs);
       break;
     case "add":
-      isValidAllOptions(commandArgs)
-      add(commandArgs, appOptions)
+      isValidAllOptions(commandArgs);
+      await add(commandArgs);
       break;
     case "edit":
-      isValidAllOptions(commandArgs)
-      edit(commandArgs, appOptions)
+      isValidAllOptions(commandArgs);
+      await edit(commandArgs);
       break;
     case "remove":
-      isValidWithoutDir(commandArgs)
-      remove(commandArgs, appOptions)
+      isValidWithoutDir(commandArgs);
+      await remove(commandArgs);
       break;
     case "list":
-      list(appOptions)
+      await list();
       break;
+    default:
+      console.log('Invalid Command.')
   }
 }
 
-function isValidAllOptions(commandArgs: CommandArgs){
+function isValidAllOptions(commandArgs: CommandArgs) {
   if (!commandArgs.label || !commandArgs.dir) {
-    throw new Error(`Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`)
+    throw new Error(
+      `Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`,
+    );
   }
 }
 
-function isValidWithoutDir(commandArgs: CommandArgs){
+function isValidWithoutDir(commandArgs: CommandArgs) {
   if (!commandArgs.label) {
-    throw new Error(`Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`)
+    throw new Error(
+      `Invalid Parameters. ${commandArgs.label} ${commandArgs.dir}`,
+    );
   }
 }
 
@@ -86,4 +72,4 @@ function showAllCommands() {
   console.log("portal list");
 }
 
-main(command, commandArgs, appOptions);
+main(command, commandArgs);

@@ -1,17 +1,18 @@
-import type {AppOptions, CommandArgs} from "./main.ts";
+import type { CommandArgs } from "./main.ts";
+import { IO } from "./lib/file.ts";
 
-export async function go (value:CommandArgs, appOptions: AppOptions){
-  const file = await Deno.readTextFile(appOptions.PORTAL_FILE)
+export async function go(value: CommandArgs) {
+  const input = await IO.read();
 
-  let lines = file.split('\n')
+  let lines = input.split("\n");
   const matchedIndex = lines.findIndex((line) => {
-    return line.match(new RegExp(`^${value.label} `))
-  })
-  if (matchedIndex < 0){
-    console.log('No matched label.')
-    return
+    return line.match(new RegExp(`^${value.label} `));
+  });
+  if (matchedIndex < 0) {
+    console.log("No matched label.");
+    return;
   }
-  const path = lines[matchedIndex].split(' ').pop()
-  console.log(path)
-  Deno.exit(2)
+  const path = lines[matchedIndex].split(" ").pop();
+  console.log(path);
+  Deno.exit(2);
 }
