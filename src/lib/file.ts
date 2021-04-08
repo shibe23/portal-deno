@@ -3,7 +3,7 @@
 //   ? path.join(process.env.APPDATA!, 'Portal', 'portal.dat')
 //   : path.join(os.homedir(), '.portal');
 
-const filePath = `${Deno.env.get("HOME")}/.portal_test`;
+const filePath = `${Deno.env.get("HOME")}/.portal`;
 
 if (!filePath) {
   throw new Error(".portal file doesn't exist.");
