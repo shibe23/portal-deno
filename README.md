@@ -12,7 +12,7 @@ sh shell/install.sh
 Or setting manually.
 
 ```
-git@github.com:shibe23/portal-deno.git
+git clone git@github.com:shibe23/portal-deno.git
 
 echo source `pwd`/shell/portal.sh >> ~/.bashrc
 touch ~/.portal
