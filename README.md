@@ -66,7 +66,7 @@ deno run --allow-env --allow-read --allow-write src/main.ts [command] [label] [d
 ## build
 
 ```
-deno --unstable compile --allow-env --allow-read --allow-write --output ./bin/portal-exec src/main.ts
+deno --unstable compile --lite --allow-env --allow-read --allow-write --output ./bin/portal-exec src/main.ts
 ```
 
 # LICENCE
