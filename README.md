@@ -1,6 +1,6 @@
 # Portal
 
-Change Directory Helper.
+Change Directory Helper by Deno.
 
 # Install
 
